@@ -31,7 +31,7 @@ The `groupX` folders define a specific configuration for each group.
 Due to the imaginary environment variables `env.GROUP` and `env.ENV` we can get different configurations as a result of merging the contents of files.
 
 ```yml
-- uses: levonet/action-config-levels@master
+- uses: blablacar/action-config-levels@master
   id: config
   with:
     patterns: |

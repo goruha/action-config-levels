@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/levonet/action-config-levels.git"
+    "url": "git+https://github.com/blablacar/action-config-levels.git"
   },
   "keywords": [
     "GitHub",
@@ -19,9 +19,9 @@
   "author": "Pavlo Bashynskyi (levonet)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/levonet/action-config-levels/issues"
+    "url": "https://github.com/blablacar/action-config-levels/issues"
   },
-  "homepage": "https://github.com/levonet/action-config-levels#readme",
+  "homepage": "https://github.com/blablacar/action-config-levels#readme",
   "dependencies": {
     "@actions/core": "^1.4.0",
     "deepmerge": "^4.2.2",
