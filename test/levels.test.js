@@ -91,6 +91,14 @@ describe('test getFiles()', () => {
             'test/assets/a/c/conf2.yml'
         ])
     })
+    test('expect no duplication', () => {
+        expect(levels.getFiles('- test/assets/**/*1.yml\n- test/assets/**/*1.yml')).toEqual([
+            'test/assets/conf1.yml',
+            'test/assets/a/conf1.yml',
+            'test/assets/b/conf1.yml',
+            'test/assets/a/c/conf1.yml'
+        ])
+    })
 })
 
 describe('test getLevels()', () => {
