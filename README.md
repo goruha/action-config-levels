@@ -125,6 +125,34 @@ Output each property of the object as JSON.
 
 Default: `false`.
 
+### `loop`
+
+If `loop` is defined, then the action is repeated as many times as the number of rows in the variable's content.
+All found mentions of `{{ item }}` in the pattern are replaced with a row from the `loop` variable.
+The iterative execution of the action returns the object as JSON, where the key contains a row,
+and the value is the result of the execution of the action according to the pattern.
+Also it has output for each row as a serialized key with value in JSON if `output_properties` is enabled.
+
+Example:
+
+```yml
+- uses: blablacar/action-config-levels@master
+  id: config
+  with:
+    patterns: |
+      - {{ item }}/common.yml
+      - {{ item }}/${{ env.ENV }}.yml
+    loop: |
+      dir1
+      dir2/subdir
+
+- run: echo '${{ steps.config.outputs.result }}'
+
+- run: echo '${{ steps.config.outputs.dir1 }}'
+
+- run: echo '${{ steps.config.outputs.dir2_subdir }}'
+```
+
 ## Outputs
 
 ###  `result`

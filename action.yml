@@ -31,6 +31,13 @@ inputs:
       Output each property of the object as JSON.
       Default: 'false'.
     default: 'false'
+  loop:
+    description: |
+      If `loop` is defined, then the action is repeated as many times as the number of rows in the variable's content.
+      All found mentions of `{{ item }}` in the pattern are replaced with a row from the `loop` variable.
+      The iterative execution of the action returns the object as JSON, where the key contains a row,
+      and the value is the result of the execution of the action according to the pattern.
+      Also it has output for each row as a serialized key with value in JSON if `output_properties` is enabled.
 outputs:
   result:
     description: Merged configuration as JSON or plain text.

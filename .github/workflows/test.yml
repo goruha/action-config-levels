@@ -51,3 +51,24 @@ jobs:
     - run: echo '${{ steps.plain.outputs.result }}'
     - if: ${{ toJSON(steps.plain.outputs.result) != '"root\ntestA\ntestB\n"' }}
       run: 'false'
+
+    - uses: ./
+      id: loop
+      with:
+        output_properties: 'true'
+        patterns: |
+          - test/assets/conf1.yml
+          - test/assets/{{ item }}/conf1.yml
+        loop: |
+          a
+          a/c
+          b
+    - run: echo '${{ steps.loop.outputs.result }}'
+    - if: ${{ steps.loop.outputs.result != '{"a":{"test":"a1"},"a/c":{"test":"c1"},"b":{"test":"b1"}}' }}
+      run: 'false'
+    - if: ${{ steps.loop.outputs.a != '{"test":"a1"}' }}
+      run: 'false'
+    - if: ${{ steps.loop.outputs.a_c != '{"test":"c1"}' }}
+      run: 'false'
+    - if: ${{ steps.loop.outputs.b != '{"test":"b1"}' }}
+      run: 'false'
