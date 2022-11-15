@@ -38,6 +38,19 @@ inputs:
       The iterative execution of the action returns the object as JSON, where the key contains a row,
       and the value is the result of the execution of the action according to the pattern.
       Also it has output for each row as a serialized key with value in JSON if `output_properties` is enabled.
+  loop_items_format:
+    description: |
+      The format in which the list is passed to the loop:
+      - `text` — each row is an item of a list
+      - `json` — list in JSON format
+      - `yaml` — list in YAML format
+      Default: 'text'.
+    default: text
+  loop_items_key:
+    description: |
+      Object path to the value that acts as the key.
+      Helps set the key by which the result will be available if the item contains an object.
+      Otherwise, the index is used as the key.
 outputs:
   result:
     description: Merged configuration as JSON or plain text.

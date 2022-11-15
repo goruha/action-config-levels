@@ -13,3 +13,15 @@ describe('test configLevels()', () => {
         expect(action.configLevels('- test/assets/**/file.txt', {}, log)).toEqual('root\ntestA\ntestB\n')
     })
 })
+
+describe('test getLoopItems()', () => {
+    test('expect object config', () => {
+        expect(action.getLoopItems('- boo\n- foo', 'yaml')).toEqual(['boo', 'foo'])
+    })
+    test('expect array config', () => {
+        expect(action.getLoopItems('["boo","foo"]', 'json')).toEqual(['boo', 'foo'])
+    })
+    test('expect plain config', () => {
+        expect(action.getLoopItems('boo\r\nfoo\n\n', 'text')).toEqual(['boo', 'foo'])
+    })
+})

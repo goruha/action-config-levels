@@ -11,4 +11,10 @@ describe('test modifyPattern()', () => {
     test('expect brackets to be removed if the variable does not exist', () => {
         expect(parser.modifyPattern('- test/{{ boo }}/**/foo.yml', 'a')).toEqual('- test//**/foo.yml')
     })
+    test('expect support for elements as objects', () => {
+        expect(parser.modifyPattern('- test/{{item.boo}}/{{item.foo}}.yml', {boo: 'a', foo: 'b'})).toEqual('- test/a/b.yml')
+    })
+    test('expect support for elements as deep objects', () => {
+        expect(parser.modifyPattern('- test/{{item.a.b.c}}.yml', {a: {b: {c: 123}}})).toEqual('- test/123.yml')
+    })
 })

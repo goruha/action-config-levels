@@ -72,3 +72,48 @@ jobs:
       run: 'false'
     - if: ${{ steps.loop.outputs.b != '{"test":"b1"}' }}
       run: 'false'
+
+    - uses: ./
+      id: loop-json
+      with:
+        output_properties: 'true'
+        patterns: |
+          - test/assets/conf1.yml
+          - test/assets/{{ item }}/conf1.yml
+        loop: '["a","a/c","b"]'
+        loop_items_format: json
+    - run: echo '${{ steps.loop-json.outputs.result }}'
+    - if: ${{ steps.loop-json.outputs.result != '{"a":{"test":"a1"},"a/c":{"test":"c1"},"b":{"test":"b1"}}' }}
+      run: 'false'
+    - if: ${{ steps.loop-json.outputs.a != '{"test":"a1"}' }}
+      run: 'false'
+    - if: ${{ steps.loop-json.outputs.a_c != '{"test":"c1"}' }}
+      run: 'false'
+    - if: ${{ steps.loop-json.outputs.b != '{"test":"b1"}' }}
+      run: 'false'
+
+    - uses: ./
+      id: loop-deep-yaml
+      with:
+        output_properties: 'true'
+        patterns: |
+          - test/assets/{{ item.name }}.yml
+          - test/assets/{{ item.path }}/{{ item.name }}.yml
+        loop: |
+          - path: a
+            name: conf1
+          - path: a/c
+            name: conf1
+          - path: b
+            name: conf1
+        loop_items_format: yaml
+        loop_items_key: path
+    - run: echo '${{ steps.loop-deep-yaml.outputs.result }}'
+    - if: ${{ steps.loop-deep-yaml.outputs.result != '{"a":{"test":"a1"},"a/c":{"test":"c1"},"b":{"test":"b1"}}' }}
+      run: 'false'
+    - if: ${{ steps.loop-deep-yaml.outputs.a != '{"test":"a1"}' }}
+      run: 'false'
+    - if: ${{ steps.loop-deep-yaml.outputs.a_c != '{"test":"c1"}' }}
+      run: 'false'
+    - if: ${{ steps.loop-deep-yaml.outputs.b != '{"test":"b1"}' }}
+      run: 'false'
