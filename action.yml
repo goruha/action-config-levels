@@ -55,7 +55,7 @@ outputs:
   result:
     description: Merged configuration as JSON or plain text.
 runs:
-  using: node12
+  using: node16
   main: dist/index.js
 branding:
   icon: layers
