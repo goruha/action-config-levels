@@ -4,9 +4,9 @@
   "description": "Load configuration and merge it by redefinition levels",
   "main": "dist/index.js",
   "scripts": {
-    "dist": "$(npm bin)/ncc build index.js -m --license licenses.txt",
-    "lint": "$(npm bin)/eslint .",
-    "test": "$(npm bin)/jest --runInBand"
+    "dist": "NODE_OPTIONS=--openssl-legacy-provider ncc build index.js -m --license licenses.txt",
+    "lint": "eslint .",
+    "test": "jest --runInBand"
   },
   "repository": {
     "type": "git",
